@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>箭头函数及This指针</title>
+    <style>
+        .box {
+            weight: 100px;
+            height: 100px;
+            background: aqua;
+            position: relative;
+            left: 0;
+            transition: 1s;
+
+        }
+    </style>
+
+</head>
+<body>
+<div class="box"></div>
+<script>
+    let box = document.querySelector('.box');
+    box.onclick = moveOldStyle;
+
+    //箭头函数中的this指向的是调用的是上一层作用域的this，这里指向的是调用的上一层对象，
+    // 即是调用move方法的对象
+    //这里和普通函数是不同的
+    function move() {
+        setTimeout(() => {
+            this.style.left = '100px';
+        }, 1000);
+    }
+
+    //setTime中函数的参数，普通函数中的this指向的是window对象
+    //此时，可以把外层的指向调用对象的this传递进来使用
+    function moveOldStyle() {
+        let _this = this;
+        setTimeout(function(){
+            _this.style.left = '100px';
+        }, 1000);
+    }
+
+    //这种情况下，对象中定义的this，指向的为window对象
+    //箭头函数调用上一层作用域，这里指obj对象，但是对象不能独立形成作用域，所以只能指向window对象
+    let obj={
+        fn:()=>{
+            console.log(this);
+        }
+    }
+
+    obj.fn();
+</script>
+</body>
+</html>
