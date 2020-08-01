@@ -2,9 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>防抖函数编写</title>
+    <style>
+        .box {
+            height: 200px;
+            background: aquamarine;
+        }
+    </style>
 </head>
 <body>
+<div class="box"></div>
+<script>
+    var box = document.querySelector('.box');
+    var testDebounce = debounce(move, 1000);
 
+    box.onmousemove = testDebounce;
+
+    function move(ev) {
+        this.innerHTML = ev.clientX;
+    }
+
+    function debounce(fn,wait) {
+        let timer = null;
+        return function () {
+            let args = arguments;
+            let now = !timer;
+            timer && clearTimeout(timer);
+            timer = setTimeout(()=>{
+                timer = null;
+            }, wait);
+            if (now) {
+                <!--当前this指向方法调用方-->
+                fn.apply(this,args);
+            }
+        };
+    }
+</script>
 </body>
 </html>
