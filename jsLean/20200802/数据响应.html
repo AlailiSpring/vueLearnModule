@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据响应实现</title>
+    <script src="myvue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{name}}
+    <div>{{message}}</div>
+</div>
+<script>
+    let vm = new vue({
+        el: '#app',
+        data: {
+            name: 'lili',
+            message: 'data test'
+        }
+    });
+// console.log(vm);
+// console.log(vm._data.name);
+
+</script>
+</body>
+</html>
