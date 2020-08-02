@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>代理讲解</title>
+</head>
+<body>
+<div class="box"></div>
+    <script>
+        let box = document.querySelector('.box');
+        let data = {
+            name: 'lili',
+            age: 20
+        };
+
+        // box.innerHTML = data.age;
+        //
+        // data.age = 30;
+        // console.log(data);
+
+        let p = new Proxy(data, {
+            set(target, prop, value) {
+                console.log("set.....", target, prop, value);
+                //确保原生属性方法得以执行
+                return Reflect.set(...arguments);
+            },
+            get(target, prop, receiver) {
+                console.log("get.....", target, prop, receiver);
+                return Reflect.get(...arguments);
+            }
+        });
+        //test it!
+        p.age = 21;
+       console.log(p.name);
+    </script>
+</body>
+</html>
