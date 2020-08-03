@@ -2,20 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>数据响应实现</title>
+    <title>数据响应及双向绑定</title>
     <script src="myvue.js"></script>
 </head>
 <body>
 <div id="app">
     {{name}}
     <div>{{message}}</div>
+    <input v-model="test">{{test}}
 </div>
 <script>
     let vm = new vue({
         el: '#app',
         data: {
             name: 'lili',
-            message: 'data test'
+            message: 'data test',
+            test:'双绑数据'
         }
     });
 // console.log(vm);
